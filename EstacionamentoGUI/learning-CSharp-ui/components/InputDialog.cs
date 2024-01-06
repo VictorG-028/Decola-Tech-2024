@@ -1,6 +1,6 @@
-namespace learning_CSharp_ui;
+namespace learning_CSharp_ui.components;
 
-public class InputDialog : Form
+public class InputDialog<T> : Form
 {
   private readonly List<Label> promptLabels = [];
   private readonly List<TextBox> inputTextBoxes = [];
@@ -12,7 +12,7 @@ public class InputDialog : Form
     // Height = 
   };
 
-  public Dictionary<int, decimal> Results = [];
+  public Dictionary<int, T> Results = [];
 
   public InputDialog(string[] prompts)
   {
@@ -22,7 +22,7 @@ public class InputDialog : Form
   private void InitializeComponents(string[] prompts)
   {
     okButton.Height += 20;
-    int extraFinalHeight = 10;
+    int extraFinalHeight = 0;//10;
     int promptHeight = okButton.Height + extraFinalHeight;
 
     int i = 0;
@@ -31,7 +31,8 @@ public class InputDialog : Form
       inputTextBoxes.Add(new()
       {
         Dock = DockStyle.Top,
-        TextAlign = HorizontalAlignment.Center
+        TextAlign = HorizontalAlignment.Center,
+        Top = 50
       });
       Controls.Add(inputTextBoxes[i]);
 
@@ -43,8 +44,8 @@ public class InputDialog : Form
       });
       Controls.Add(promptLabels[i]);
 
+      promptHeight += inputTextBoxes[i].Height * 2 + promptLabels[i].Height * 2;
       i++;
-      promptHeight += inputTextBoxes[i].Height + promptLabels[i].Height;
     }
     okButton.Click += OkButton_Click;
     Controls.Add(okButton);
@@ -58,17 +59,19 @@ public class InputDialog : Form
     try
     {
       int i = 0;
-      foreach (TextBox tb in inputTextBoxes)
+      foreach (TextBox textBox in inputTextBoxes)
       {
-        if (decimal.TryParse(tb.Text, out decimal result))
-        {
-          Results[i] = result;
-          i++;
-        }
-        else
-        {
-          throw new FormatException("Por favor, insira um número decimal válido.");
-        }
+        // if (decimal.TryParse(tb.Text, out decimal result))
+        // {
+        // Use Convert.ChangeType para converter o valor da TextBox para o tipo genérico T
+        T result = (T)Convert.ChangeType(textBox.Text, typeof(T));
+        Results[i] = result;
+        i++;
+        // }
+        // else
+        // {
+        //   throw new FormatException("Por favor, insira um número decimal válido.");
+        // }
       }
       Close();
     }

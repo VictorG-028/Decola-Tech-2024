@@ -1,16 +1,10 @@
-using learning_CSharp_ui.src;
 using learning_CSharp_ui.Pages;
 
-namespace learning_CSharp_ui;
+namespace learning_CSharp_ui.src;
 
-static class Program
+static class GraphicProgram
 {
-  /// <summary>
-  ///  The main entry point for the application.
-  /// </summary>
-
-  [STAThread]
-  static void Main()
+  public static void RunGraphicVersion()
   {
     // To customize application configuration such as set high DPI settings or default font,
     // see https://aka.ms/applicationconfiguration.

@@ -1,4 +1,4 @@
-namespace DesafioFundamentos.Models
+namespace learning_CSharp_ui.Models
 {
     public class Utils
     {

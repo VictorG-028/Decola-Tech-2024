@@ -1,4 +1,6 @@
-namespace DesafioFundamentos.Models
+using learning_CSharp_ui.components;
+
+namespace learning_CSharp_ui.Models
 {
   public class Parking
   {
@@ -12,34 +14,30 @@ namespace DesafioFundamentos.Models
       this.pricePerHour = pricePerHour;
     }
 
-    public void AddVehicle()
+    public void AddVehicle(string plate)
     {
-      Console.WriteLine("Digite a placa do veículo para estacionar:");
-      vehicles.Add(Utils.ReadNonNullString());
+      vehicles.Add(plate);
     }
 
-    public void RemoveVehicle()
+    public void RemoveVehicle(string plate, int hours)
     {
-      Console.WriteLine("Digite a placa do veículo para remover:");
-
-
-      string placa = Utils.ReadNonNullString();
-
       // Verifica se o veículo existe
       if (vehicles.Any(
-        x => x.Equals(placa, StringComparison.CurrentCultureIgnoreCase)
+        x => x.Equals(plate, StringComparison.CurrentCultureIgnoreCase)
       ))
       {
         Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
 
-        int horas = 0;
-        while (!int.TryParse(Console.ReadLine(), out horas)) { };
-        decimal valorTotal = initialPrice + pricePerHour * horas;
+        decimal valorTotal = initialPrice + pricePerHour * hours;
 
-        vehicles.Remove(placa);
+        vehicles.Remove(plate);
 
-        Console.WriteLine($"{valorTotal:c} = {initialPrice:c} + {pricePerHour:c} * {horas}");
-        Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: {valorTotal:c}");
+        // TODO usar o popup component aqui
+        Popup p = new([
+          $"{valorTotal:c} = {initialPrice:c} + {pricePerHour:c} * {hours}",
+          $"O veículo {plate} foi removido e o preço total foi de: {valorTotal:c}"
+        ]);
+        p.ShowDialog();
       }
       else
       {
@@ -51,15 +49,8 @@ namespace DesafioFundamentos.Models
     {
       if (vehicles.Count != 0) // Verifica se há veículos no estacionamento
       {
-        Console.WriteLine("Os veículos estacionados são:");
-        foreach (string v in vehicles)
-        {
-          Console.WriteLine(v);
-        }
-      }
-      else
-      {
-        Console.WriteLine("Não há veículos estacionados.");
+        Popup p = new([.. vehicles]);
+        p.ShowDialog();
       }
     }
   }
