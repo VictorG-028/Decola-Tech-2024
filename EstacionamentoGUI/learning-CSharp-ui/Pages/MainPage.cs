@@ -5,63 +5,108 @@ namespace learning_CSharp_ui.Pages;
 
 public partial class MainPage : Form
 {
-  // private readonly TextBox userTextInputField = new()
-  // {
-  //   Location = new Point(10, 10),
-  //   Size = new Size(200, 20)
-  // };
   private readonly Button addButton = new()
   {
     Text = "1 - Cadastrar veículo",
-    Location = new Point(10, 40),
-    Size = new Size(130, 30)
+    // Location = new Point(10, 40),
+    // Size = new Size(130, 30),
+    AutoSize = true,
+    AutoSizeMode = AutoSizeMode.GrowAndShrink,
+    BackColor = Color.Wheat,
   };
   private readonly Button removeButton = new()
   {
     Text = "2 - Remover veículo",
-    Location = new Point(10, 70),
-    Size = new Size(130, 30)
+    // Location = new Point(10, 70),
+    // Size = new Size(130, 30),
+    AutoSize = true,
+    AutoSizeMode = AutoSizeMode.GrowAndShrink,
+    BackColor = Color.Wheat,
   };
   private readonly Button listButton = new()
   {
     Text = "3 - Listar veículos",
-    Location = new Point(10, 100),
-    Size = new Size(130, 30)
+    // Location = new Point(10, 100),
+    // Size = new Size(130, 30),
+    AutoSize = true,
+    AutoSizeMode = AutoSizeMode.GrowAndShrink,
+    BackColor = Color.Wheat,
   };
   private readonly Button exitButton = new()
   {
     Text = "4 - Encerrar",
-    Location = new Point(10, 130),
-    Size = new Size(130, 30)
+    // Location = new Point(10, 130),
+    // Size = new Size(130, 30),
+    AutoSize = true,
+    AutoSizeMode = AutoSizeMode.GrowAndShrink,
+    BackColor = Color.Wheat,
   };
   private readonly Parking p = InitAskingUserInputs();
 
   public MainPage()
   {
     InitializeComponent();
-
-    // TextBox
-    // Controls.Add(userTextInputField);
-    // userTextInputField.TextChanged += InputField_TextChanged;
-
-    // Botões
-    addButton.Click += AddVeihicle_Click;
-    Controls.Add(addButton);
-
-    removeButton.Click += RemoveVehicleButton_Click;
-    Controls.Add(removeButton);
-
-    listButton.Click += ListVehiclesButton_Click;
-    Controls.Add(listButton);
-
-    exitButton.Click += ExitButton_Click;
-    Controls.Add(exitButton);
+    InitializeButtons();
+    InitializeLayout();
+    this.Text = "EstacionamentoGUI";
+    this.BackColor = Color.Tan;
+    string path = "../../../images/Avanade.ico";
+    // this.BackgroundImage = Image.FromFile(path);
+    try { this.Icon = new Icon(path); }// Precisa ser um arquivo .ico com resolução 32x32
+    catch (Exception ex) { Console.WriteLine(ex); }
   }
 
-  // private void InputField_TextChanged(object? sender, EventArgs e)
-  // {
-  //   Console.WriteLine("Texto no TextBox: " + userTextInputField.Text);
-  // }
+
+  private void InitializeButtons()
+  {
+    // Adicione eventos e controles aos botões aqui
+    addButton.Click += AddVeihicle_Click;
+    removeButton.Click += RemoveVehicleButton_Click;
+    listButton.Click += ListVehiclesButton_Click;
+    exitButton.Click += ExitButton_Click;
+  }
+
+  private void InitializeLayout()
+  {
+    TableLayoutPanel tableLayoutPanel = new TableLayoutPanel
+    {
+      Dock = DockStyle.Fill,
+      AutoSize = true,
+      Margin = new Padding(20, 20, 20, 20)  // Margens superior e inferior de 10 pixels
+    };
+
+    // Adicione os botões ao layout
+    tableLayoutPanel.Controls.Add(addButton);
+    tableLayoutPanel.Controls.Add(removeButton);
+    tableLayoutPanel.Controls.Add(listButton);
+    tableLayoutPanel.Controls.Add(exitButton);
+
+    // Define o alinhamento vertical dos botões como central
+    foreach (Control control in tableLayoutPanel.Controls)
+    {
+      if (control is Button button)
+      {
+        button.Anchor = AnchorStyles.None;
+        button.Dock = DockStyle.None;
+        button.TextAlign = ContentAlignment.MiddleCenter;
+      }
+    }
+
+    // Adicione o layout ao formulário
+    Controls.Add(tableLayoutPanel);
+
+    int minWidth = 350;
+    int minHeight = 230;
+    this.MinimumSize = new Size(minWidth, minHeight);
+
+    // Define o tamanho da janela com base no tamanho dos botões
+    int maxWidth = Math.Max(
+      Math.Max(addButton.Width, removeButton.Width),
+      Math.Max(listButton.Width, exitButton.Width)
+    );
+
+    this.ClientSize = new Size(Math.Max(maxWidth + 20, minWidth), minHeight);
+  }
 
   private void AddVeihicle_Click(object? sender, EventArgs e)
   {

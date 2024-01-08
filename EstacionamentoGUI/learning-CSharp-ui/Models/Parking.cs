@@ -47,11 +47,16 @@ namespace learning_CSharp_ui.Models
 
     public void ListVehicles()
     {
+      Popup p;
       if (vehicles.Count != 0) // Verifica se há veículos no estacionamento
       {
-        Popup p = new([.. vehicles]);
-        p.ShowDialog();
+        p = new([.. vehicles]);
       }
+      else
+      {
+        p = new(["Nenhum carro no estacionamento"]);
+      }
+      p.ShowDialog();
     }
   }
 }

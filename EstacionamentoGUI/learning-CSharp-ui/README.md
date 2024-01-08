@@ -1,4 +1,6 @@
-## Projeto - Estacionamento
+## Projeto - EstacionamentoGUI
+
+[Interface Gráfica](https://github.com/VictorG-028/Decola-Tech-2024/tree/master/images/EstacionamentoGUI_image.png)
 
 - Esse projeto é um fork da [trilha-net-fundamentos-desafio](https://github.com/digitalinnovationone/trilha-net-fundamentos-desafio) e possui uma interface gráfica codificada com a biblioteca WindowsForms. 
 - Além de resolver o desafio demostrando domínio dos fundamentos de programação, esse projeto refatorou o código para deixar fácil de ler e manter. 
