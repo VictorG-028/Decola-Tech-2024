@@ -1,9 +1,13 @@
 # DIO - Trilha .NET - Monorepo dos projetos
 
-[Decola Tech Logo](https://github.com/VictorG-028/Decola-Tech-2024/tree/master/images/decola_tech_logo.png)
+<!-- ![Decola Tech Logo](https://github.com/VictorG-028/Decola-Tech-2024/blob/master/images/decola_tech_logo.png) -->
+<a href="https://github.com/VictorG-028/Decola-Tech-2024/blob/master/images/decola_tech_logo.png">
+  <img src="https://github.com/VictorG-028/Decola-Tech-2024/blob/master/images/decola_tech_logo.png" align="left" height="128" width="256" >
+</a>
 
-- Nesse repositório, cada pasta é um projeto com um README próprio.
-- Projetos desenvolvidos no curso Avanade Decola Tech 2024.
+&nbsp; Nesse repositório, cada pasta é um projeto desenvolvidos no curso Avanade Decola Tech 2024 com um README próprio. 
+</br>
+</br>
 
 ## Conheça outros dos meus projetos desenvolvidos na faculdade
 
